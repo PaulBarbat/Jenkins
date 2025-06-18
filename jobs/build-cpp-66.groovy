@@ -22,6 +22,7 @@ pipeline {
                 cd ${BUILD_DIR}
                 cmake ..
                 make -j$(nproc)
+                ls -ll
                 '''
             }
         }
