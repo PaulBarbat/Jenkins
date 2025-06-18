@@ -48,7 +48,7 @@ pipeline {
                     def executable_path = sh(script: "ls ${BUILD_DIR}/Card_Game_66-*", returnStdout: true).trim()
                     def executable = executable_path.split('/').last()
                     def executable_with_build_number = "${executable}-${env.BUILD_NUMBER}"
-                    withAWS(region: 'eu-central-1', credentials: 'bd77ee04-1eed-4e13-ad2b-b4ad37857124') {
+                    withAWS(role: 'arn:aws:iam::396913703657:role/jenkins-ec2-role-terraform', roleSessionName: 'jenkins-session') {
                     sh """
                     ls -ll
                     pwd
