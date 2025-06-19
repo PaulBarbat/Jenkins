@@ -51,18 +51,15 @@ pipeline {
         stage('Upload to S3'){
             steps{
                 script{
-                    sh """
-                        cd ${BUILD_DIR}
-                        pwd
-                        ls -ll
-                    """
-
                     def version = readFile('Version.txt').trim()
                     def zipName = "Card_Game_66-${version}-${env.BUILD_NUMBER}.zip"
 
                     sh """
+                        pwd
+                        ls -ll
                         mkdir -p package_output
-                        cp build-*/Card_Game_66-* package_output/
+                        cp linux package_output/
+                        cp windows package_output/
                         cd package_output
                         zip -r ../${zipName} .
                     """
