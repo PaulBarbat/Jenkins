@@ -58,8 +58,8 @@ pipeline {
                         pwd
                         ls -ll
                         mkdir -p package_output
-                        cp linux package_output/
-                        cp windows package_output/
+                        cp build/linux package_output/
+                        cp build/windows package_output/
                         cd package_output
                         zip -r ../${zipName} .
                     """
