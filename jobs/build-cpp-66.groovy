@@ -14,15 +14,26 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build Linux') {
             steps {
-                echo "Building the C++ project..."
+                echo "Building for Linux"
                 sh '''
-                mkdir -p ${BUILD_DIR}
-                cd ${BUILD_DIR}
-                cmake ..
-                make -j$(nproc)
+                mkdir -p ${BUILD_DIR}/linux
+                cd ${BUILD_DIR}/linux
+                cmake ../.. -G Ninja -DCMAKE_BUILD_TYPE=Release -DPLATFORM_NAME=Linux
+                cmake --build .
                 ls -ll
+                '''
+            }
+        }
+        stage('Build Windows'){
+            steps{
+                echo "Build for Windows"
+                sh '''
+                mkdir -p build/windows
+                cd build/windows
+                cmake ../.. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=../../cmake/windows-toolchain.cmake -DPLATFORM_NAME=Windows
+                cmake --build .
                 '''
             }
         }
@@ -41,19 +52,27 @@ pipeline {
             steps{
                 script{
                     sh """
-                    cd ${BUILD_DIR}
-                    pwd
-                    ls -ll
+                        cd ${BUILD_DIR}
+                        pwd
+                        ls -ll
                     """
-                    def executable_path = sh(script: "ls ${BUILD_DIR}/Card_Game_66-*", returnStdout: true).trim()
-                    def executable = executable_path.split('/').last()
-                    def executable_with_build_number = "${executable}-${env.BUILD_NUMBER}"
-                    withAWS(role: 'arn:aws:iam::396913703657:role/jenkins-ec2-role-terraform', roleSessionName: 'jenkins-session') {
+
+                    def version = readFile('Version.txt').trim()
+                    def zipName = "Card_Game_66-${version}-${env.BUILD_NUMBER}.zip"
+
                     sh """
-                    ls -ll
-                    pwd
-                    aws s3 cp ${executable_path} s3://card-game-66-personal-bucket/builds/${executable_with_build_number}
+                        mkdir -p package_output
+                        cp build-*/Card_Game_66-* package_output/
+                        cd package_output
+                        zip -r ../${zipName} .
                     """
+
+                    withAWS(role: 'arn:aws:iam::396913703657:role/jenkins-ec2-role-terraform', roleSessionName: 'jenkins-session') {
+                        sh """
+                            ls -ll
+                            pwd
+                            aws s3 cp ${zipName} s3://card-game-66-personal-bucket/builds/${zipName}
+                        """
                     }
                 }
                 
