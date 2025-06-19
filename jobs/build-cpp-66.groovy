@@ -32,7 +32,7 @@ pipeline {
                 sh '''
                 mkdir -p build/windows
                 cd build/windows
-                cmake ../.. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=../../cmake/windows-toolchain.cmake -DPLATFORM_NAME=Windows
+                cmake ../.. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=../../windows-toolchain.cmake -DPLATFORM_NAME=Windows
                 cmake --build .
                 '''
             }
