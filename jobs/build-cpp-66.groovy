@@ -58,6 +58,7 @@ pipeline {
                         pwd
                         ls -ll
                         mkdir -p package_output
+                        mkdir -p package_output/resources
                         cp build/linux/Card_Game_66* package_output/
                         cp build/windows/Card_Game_66* package_output/
                         cp -r resources/*.xml package_output/resources/
