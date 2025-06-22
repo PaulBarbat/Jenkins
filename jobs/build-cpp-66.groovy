@@ -48,25 +48,6 @@ pipeline {
                 cd ${BUILD_DIR}/linux
                 ./Card_Game_66-* <<EOF
                 1
-                2
-                3
-                4
-                5
-                6
-                7
-                8
-                9
-                10
-                11
-                12
-                13
-                14
-                15
-                16
-                17
-                18
-                19
-                some-other-input
                 EOF
                 '''
             }
