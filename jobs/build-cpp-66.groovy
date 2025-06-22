@@ -19,6 +19,7 @@ pipeline {
                 echo "Building for Linux"
                 sh '''
                 mkdir -p ${BUILD_DIR}/linux
+                mkdir -p ${BUILD_DIR}/linux/resources
                 cp -r resources/*.xml ${BUILD_DIR}/linux/resources/
                 cd ${BUILD_DIR}/linux
                 cmake ../.. -G Ninja -DCMAKE_BUILD_TYPE=Release -DPLATFORM_NAME=Linux
