@@ -1,6 +1,6 @@
 pipeline {
     parameters {
-    string(name: 'BRANCH', defaultValue: 'main', description: 'Git branch to build')
+    string(name: 'BRANCH', defaultValue: 'feature/Player', description: 'Git branch to build')
     }
     agent { label 'jenkins-agent' }  // Ensure this label matches your autoscaling group nodes
 
