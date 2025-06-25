@@ -1,4 +1,7 @@
 pipeline {
+    parameters {
+    string(name: 'BRANCH', defaultValue: 'main', description: 'Git branch to build')
+    }
     agent { label 'jenkins-agent' }  // Ensure this label matches your autoscaling group nodes
 
     environment {
@@ -10,7 +13,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "Cloning C++ repository..."
-                git branch: 'main', url: "${REPO_URL}"
+                git branch: "${params.BRANCH}", url: "${REPO_URL}"
             }
         }
 
