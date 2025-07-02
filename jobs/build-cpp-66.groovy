@@ -50,6 +50,11 @@ pipeline {
                 sh '''
                 cd ${BUILD_DIR}/linux
                 ls -ll
+                ./Card_Game_66-* <<EOF
+                2
+                2
+                2
+                EOF
                 '''
             }
         }
