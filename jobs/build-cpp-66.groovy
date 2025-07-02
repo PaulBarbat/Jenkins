@@ -1,6 +1,7 @@
 pipeline {
     parameters {
     string(name: 'BRANCH', defaultValue: 'feature/GameState', description: 'Git branch to build')
+    booleanParam(name: 'RUN_TESTS', defaultValue: false, description: 'Run test stage?')
     }
     agent { label 'jenkins-agent' }  // Ensure this label matches your autoscaling group nodes
 
@@ -44,9 +45,11 @@ pipeline {
         }
 
         stage('Test') {
+            when {
+            expression { return params.RUN_TESTS }
+            }
             steps {
                 echo "Running interactive test..."
-
                 sh '''
                 cd ${BUILD_DIR}/linux
                 ls -ll
