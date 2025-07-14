@@ -25,7 +25,7 @@ pipeline {
                     ls -ll
                     mkdir -p ${BUILD_DIR}/linux
                     mkdir -p ${BUILD_DIR}/linux/resources
-                    cp -r resources/* ${BUILD_DIR}/linux/resources
+                    cp -r Engine/resources/* ${BUILD_DIR}/linux/resources
                     cd ${BUILD_DIR}/linux
                     cmake ../.. -G Ninja -DCMAKE_BUILD_TYPE=Release -DPLATFORM_NAME=Linux
                     cmake --build .
