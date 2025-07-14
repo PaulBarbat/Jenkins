@@ -19,27 +19,37 @@ pipeline {
         }
 
         stage('Build Linux'){
-            echo "Building for Linux"
-            sh '''
-                mkdir -p ${BUILD_DIR}/linux
-                mkdir -p ${BUILD_DIR}/linux/resources
-                cp -r resources/* ${BUILD_DIR}/linux/resources
-                cd ${BUILD_DIR}/linux
-                cmake ../.. -G Ninja -DCMAKE_BUILD_TYPE=Release -DPLATFORM_NAME=Linux
-                cmake --build .
-                ls -ll
-            '''
+            steps{
+                echo "Building for Linux"
+                sh '''
+                    mkdir -p ${BUILD_DIR}/linux
+                    mkdir -p ${BUILD_DIR}/linux/resources
+                    cp -r resources/* ${BUILD_DIR}/linux/resources
+                    cd ${BUILD_DIR}/linux
+                    cmake ../.. -G Ninja -DCMAKE_BUILD_TYPE=Release -DPLATFORM_NAME=Linux
+                    cmake --build .
+                    ls -ll
+                '''
+            }
         }
 
         stage('Build Windows'){
-
+            steps{
+                echo "Build for Windows TODO"
+            }
         }
 
         stage('Tests'){
+            steps{
+                echo "Test stage TODO"
+            }
 
         }
 
         stage('Upload to S3'){
+            steps{
+                echo "S3 Upload stage TODO"
+            }
 
         }
     }
