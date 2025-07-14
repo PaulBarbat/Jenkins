@@ -22,6 +22,7 @@ pipeline {
             steps{
                 echo "Building for Linux"
                 sh '''
+                    ls -ll
                     mkdir -p ${BUILD_DIR}/linux
                     mkdir -p ${BUILD_DIR}/linux/resources
                     cp -r resources/* ${BUILD_DIR}/linux/resources
