@@ -41,8 +41,18 @@ pipeline {
         }
 
         stage('Tests'){
+            when {
+            expression { return params.RUN_TESTS }
+            }
             steps{
                 echo "Test stage TODO"
+                sh'''
+                cd ${BUILD_DIR/linux}
+                ls -ll
+                ./StrategyGameEngine* <<EOF
+                1
+                EOF
+                '''
             }
 
         }
