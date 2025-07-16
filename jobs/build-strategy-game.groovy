@@ -40,21 +40,20 @@ pipeline {
             }
         }
 
-        stage('Tests'){
+        stage('Test') {
             when {
             expression { return params.RUN_TESTS }
             }
-            steps{
-                echo "Test stage TODO"
-                sh'''
-                cd ${BUILD_DIR/linux}
+            steps {
+                echo "Running interactive test..."
+                sh '''
+                cd ${BUILD_DIR}/linux
                 ls -ll
-                ./StrategyGameEngine* <<EOF
-                1
+                ./StrategyGameEngine <<EOF
+                2
                 EOF
                 '''
             }
-
         }
 
         stage('Upload to S3'){
