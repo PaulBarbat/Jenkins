@@ -1,7 +1,7 @@
 pipeline {
     parameters{
         string(name: 'BRANCH' , defaultValue: 'main', description: 'git branch to build')
-        booleanParam(name:'RUN_TESTS', defaultValue: false, description:'Run test stage?')
+        booleanParam(name:'RUN_TESTS', defaultValue: true , description:'Run test stage?')
     }
     agent {label 'jenkins-agent'}
 
