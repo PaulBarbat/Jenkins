@@ -29,6 +29,7 @@ pipeline {
                 cmake ../.. -G Ninja -DCMAKE_BUILD_TYPE=Release -DPLATFORM_NAME=Linux
                 cmake --build .
                 ls -ll
+                ls /home/ubuntu/workspace/CardGame66/external/SDL2/x86_64-w64-mingw32/include
                 '''
             }
         }
