@@ -29,7 +29,6 @@ pipeline {
                 cmake ../.. -G Ninja -DCMAKE_BUILD_TYPE=Release -DPLATFORM_NAME=Linux
                 cmake --build .
                 ls -ll
-                ls /home/ubuntu/workspace/CardGame66/external/SDL2/x86_64-w64-mingw32/include
                 '''
             }
         }
@@ -75,7 +74,9 @@ pipeline {
                         mkdir -p package_output
                         mkdir -p package_output/resources
                         cp build/linux/Card_Game_66* package_output/
+                        cp build/linux/Card_Viewer* package_output/
                         cp build/windows/Card_Game_66* package_output/
+                        cp build/windows/Card_Viewer* package_output/
                         cp -r resources/*.xml package_output/resources/
                         ls -ll build/linux
                         ls -ll build/windows
