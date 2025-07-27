@@ -36,7 +36,7 @@ pipeline {
             steps{
                 echo "Build for Windows"
                 sh '''
-                cat /home/ubuntu/workspace/CardGame66/external/SDL2-devel-2.32.8-mingw/SDL2-2.32.8/x86_64-w64-mingw32/include/SDL2/SDL.h
+                rm -rf build/windows
                 mkdir -p build/windows
                 cd build/windows
                 cmake ../.. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=../../Toolchain_Windows.cmake -DPLATFORM_NAME=Windows
