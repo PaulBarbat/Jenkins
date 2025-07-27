@@ -78,6 +78,7 @@ pipeline {
                         cp build/linux/Card_Viewer* package_output/
                         cp build/windows/Card_Game_66* package_output/
                         cp build/windows/Card_Viewer* package_output/
+                        cp build/windows/*.dll package_output/
                         cp -r resources/*.xml package_output/resources/
                         ls -ll build/linux
                         ls -ll build/windows
